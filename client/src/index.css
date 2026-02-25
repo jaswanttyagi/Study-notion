@@ -1,0 +1,13 @@
+@config "../tailwind.config.js";
+@import "tailwindcss";
+
+/* Hide repeated first-column label ("Courses") added by responsive table style */
+.courses-table td:nth-of-type(1)::before {
+  content: "" !important;
+  display: none !important;
+}
+
+/* react-super-responsive-table injects labels via .tdBefore, not ::before */
+.courses-table td:nth-of-type(1) .tdBefore {
+  display: none !important;
+}
