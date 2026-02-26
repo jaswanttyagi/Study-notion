@@ -7,6 +7,23 @@ const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 const otpTemplate = require("../mail/templates/emialVerificationTemplate");
 require("dotenv").config();
+
+const getSafeMailErrorMessage = (error) => {
+  const code = error?.code || "";
+  const responseCode = Number(error?.responseCode || 0);
+  const message = String(error?.message || "").toLowerCase();
+
+  if (code === "EAUTH" || responseCode === 535 || responseCode === 534) {
+    return "Email service authentication failed. Please verify SMTP credentials.";
+  }
+  if (code === "ECONNECTION" || code === "ETIMEDOUT") {
+    return "Email service connection timed out. Please try again shortly.";
+  }
+  if (responseCode === 550 || message.includes("rejected")) {
+    return "Recipient email was rejected by the mail provider.";
+  }
+  return "Email delivery failed due to provider error. Please try again.";
+};
 // send otp
 exports.sendOTP = async (req, res) => {
   try {
@@ -65,16 +82,17 @@ exports.sendOTP = async (req, res) => {
       }
     } catch (mailErr) {
       console.error("sendOTP mail failure:", mailErr?.message || mailErr);
+      const safeMailMessage = getSafeMailErrorMessage(mailErr);
       if (otpFallbackToResponse) {
         return res.status(200).json({
           success: true,
-          message: "OTP generated. Email failed.",
+          message: safeMailMessage,
           mailDelivered: false,
         });
       }
       return res.status(500).json({
         success: false,
-        message: "OTP created but email delivery failed. Please try again.",
+        message: safeMailMessage,
       });
     }
 

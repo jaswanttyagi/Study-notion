@@ -47,7 +47,10 @@ const mailSender = async (email, title, body) => {
       response: err?.response,
       responseCode: err?.responseCode,
     });
-    throw new Error(err?.message || "SMTP delivery failed");
+    const mailError = new Error(err?.message || "SMTP delivery failed");
+    mailError.code = err?.code || "SMTP_ERROR";
+    mailError.responseCode = err?.responseCode;
+    throw mailError;
   }
 };
 
