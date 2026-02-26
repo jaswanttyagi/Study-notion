@@ -48,6 +48,7 @@ const allowAllCors = (process.env.CORS_ALLOW_ALL || "false").toLowerCase() === "
 
 const corsOptions = {
   origin: (origin, callback) => {
+    // Allow all origins when debugging cross-origin deployment issues.
     if (allowAllCors) {
       return callback(null, true);
     }
@@ -63,7 +64,9 @@ const corsOptions = {
     if (allowVercelPreviews && originHost.endsWith(".vercel.app")) {
       return callback(null, true);
     }
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
+    // Avoid throwing from CORS middleware, which can surface as opaque 502/network errors in browsers.
+    console.warn(`CORS blocked for origin: ${origin}`);
+    return callback(null, false);
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
