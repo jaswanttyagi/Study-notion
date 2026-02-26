@@ -24,6 +24,10 @@ export function sendOTP(email, navigate) {
         throw new Error(response.data.message)
       }
 
+      if (response?.data?.mailDelivered === false) {
+        throw new Error("OTP could not be delivered to email. Please try again.")
+      }
+
       toast.success("OTP Send Sucessfully")
       if (typeof navigate === "function") {
         navigate("/verify-email")
