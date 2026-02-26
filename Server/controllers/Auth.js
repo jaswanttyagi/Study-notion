@@ -10,9 +10,15 @@ require("dotenv").config();
 // send otp
 exports.sendOTP = async (req, res) => {
   try {
-    const { email } = req.body;
+    const email = req.body?.email?.trim()?.toLowerCase();
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required",
+      });
+    }
     // check if User already exist 
-    const checkUserPresent = await User.findOne({ email });
+    const checkUserPresent = await User.findOne({ email }).lean();
     // if user exist then return response ==> user already exist
     if (checkUserPresent) {
       return res.status(401).json({
@@ -72,7 +78,7 @@ exports.signup = async (req, res) => {
     const {
       firstName,
       lastName,
-      email,
+      email: rawEmail,
       password,
       confirmPassword,
       accountType,
@@ -80,6 +86,7 @@ exports.signup = async (req, res) => {
       otp,
     } = req.body;
 
+    const email = rawEmail?.trim()?.toLowerCase();
     // Validate fields
     if (
       !firstName ||
@@ -104,7 +111,7 @@ exports.signup = async (req, res) => {
     }
 
     // Check existing user
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).lean();
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -187,7 +194,8 @@ exports.signup = async (req, res) => {
 // Login
 exports.Login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email = req.body?.email?.trim()?.toLowerCase();
+    const { password } = req.body;
 
     // validate data
 
@@ -198,7 +206,9 @@ exports.Login = async (req, res) => {
       })
     }
     // check if user is not registerd
-    const user = await User.findOne({ email }).populate("additionalDetails");
+    const user = await User.findOne({ email })
+      .populate("additionalDetails")
+      .lean();
     //  if user not exist in login case then return (means user is not registered)
     if (!user) {
       return res.status(401).json({
