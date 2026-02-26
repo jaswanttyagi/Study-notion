@@ -48,14 +48,22 @@ exports.sendOTP = async (req, res) => {
     }
     const otpPayload = { email, otp };
     // create an entry for OTP
-    const otpBody = await OTP.create(otpPayload);
+    await OTP.create(otpPayload);
     // calling otpTemplate and sending
     const emailBody = otpTemplate(otpPayload.otp);
-    await mailSender(
+    const mailInfo = await mailSender(
       email,
       "OTP Verification Email",
       emailBody
-    )
+    );
+
+    if (!mailInfo || !Array.isArray(mailInfo.accepted) || !mailInfo.accepted.includes(email)) {
+      return res.status(500).json({
+        success: false,
+        message: "OTP created but email delivery failed. Please try again.",
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "OTP Sent Sucessfully",

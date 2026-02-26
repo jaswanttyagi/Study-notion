@@ -4,13 +4,14 @@ require("dotenv").config();
 
 const mailSender = async (email, title, body) => {
   try {
+    const mailPass = (process.env.MAIL_PASS || "").replace(/\s+/g, "");
     const transporter = nodemailer.createTransport({
       host: process.env.MAIL_HOST, // smtp.gmail.com
       port: 465,
       secure: true,
       auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS,
+        pass: mailPass,
       },
     });
 
@@ -26,10 +27,14 @@ const mailSender = async (email, title, body) => {
     });
 
     console.log("Email sent:", info.messageId);
+    if (Array.isArray(info.rejected) && info.rejected.length > 0) {
+      throw new Error(`Email rejected for: ${info.rejected.join(", ")}`);
+    }
     return info;
 
   } catch (err) {
     console.log("Mail error:", err.message);
+    throw err;
   }
 };
 
