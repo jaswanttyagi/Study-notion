@@ -45,23 +45,39 @@ const allowedOrigins = (process.env.FRONTEND_BASE_URL || "")
 const allowedHosts = allowedOrigins.map(toHost).filter(Boolean);
 const allowVercelPreviews = (process.env.ALLOW_VERCEL_PREVIEWS || "true").toLowerCase() === "true";
 const allowAllCors = (process.env.CORS_ALLOW_ALL || "false").toLowerCase() === "true";
+const isOriginAllowed = (origin = "") => {
+  if (!origin) return true;
+  if (allowAllCors) return true;
+  const normalizedOrigin = normalizeOrigin(origin);
+  const originHost = toHost(origin);
+  if (allowedOrigins.includes(normalizedOrigin) || allowedHosts.includes(originHost)) {
+    return true;
+  }
+  if (allowVercelPreviews && originHost.endsWith(".vercel.app")) {
+    return true;
+  }
+  return false;
+};
+
+// Set CORS headers explicitly so browser preflight always receives expected headers.
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && isOriginAllowed(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Vary", "Origin");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  }
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+  return next();
+});
 
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow all origins when debugging cross-origin deployment issues.
-    if (allowAllCors) {
-      return callback(null, true);
-    }
-    // Allow server-to-server and same-origin requests with no Origin header.
-    if (!origin) {
-      return callback(null, true);
-    }
-    const normalizedOrigin = normalizeOrigin(origin);
-    const originHost = toHost(origin);
-    if (allowedOrigins.includes(normalizedOrigin) || allowedHosts.includes(originHost)) {
-      return callback(null, true);
-    }
-    if (allowVercelPreviews && originHost.endsWith(".vercel.app")) {
+    if (isOriginAllowed(origin)) {
       return callback(null, true);
     }
     // Avoid throwing from CORS middleware, which can surface as opaque 502/network errors in browsers.
