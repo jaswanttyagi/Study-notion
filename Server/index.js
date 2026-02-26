@@ -29,10 +29,23 @@ cloudinaryConnect();
 app.use(express.json());
 app.use(cookieParser());
 const normalizeOrigin = (value = "") => value.trim().replace(/\/+$/, "");
+const toHost = (value = "") => {
+  const cleaned = normalizeOrigin(value);
+  if (!cleaned) return "";
+  try {
+    const withProtocol = /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
+    return new URL(withProtocol).host.toLowerCase();
+  } catch {
+    return cleaned.replace(/^https?:\/\//i, "").toLowerCase();
+  }
+};
+
 const allowedOrigins = (process.env.FRONTEND_BASE_URL || "")
   .split(",")
   .map(normalizeOrigin)
   .filter(Boolean);
+const allowedHosts = allowedOrigins.map(toHost).filter(Boolean);
+const allowVercelPreviews = (process.env.ALLOW_VERCEL_PREVIEWS || "true").toLowerCase() === "true";
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -41,7 +54,11 @@ const corsOptions = {
       return callback(null, true);
     }
     const normalizedOrigin = normalizeOrigin(origin);
-    if (allowedOrigins.includes(normalizedOrigin)) {
+    const originHost = toHost(origin);
+    if (allowedOrigins.includes(normalizedOrigin) || allowedHosts.includes(originHost)) {
+      return callback(null, true);
+    }
+    if (allowVercelPreviews && originHost.endsWith(".vercel.app")) {
       return callback(null, true);
     }
     return callback(new Error(`CORS blocked for origin: ${origin}`));
