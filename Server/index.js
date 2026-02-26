@@ -23,8 +23,6 @@ require("dotenv").config();
 
 // find the port
 const PORT = process.env.PORT || 4000;
-db();
-cloudinaryConnect();
 // adding middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -94,7 +92,17 @@ app.get("/", (req, res) => {
 	});
 });
 
-// Listening to the server
-app.listen(PORT, () => {
-	console.log(`App is listening at ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await db();
+    cloudinaryConnect();
+    app.listen(PORT, () => {
+      console.log(`App is listening at ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
