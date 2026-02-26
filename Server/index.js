@@ -26,71 +26,15 @@ const PORT = process.env.PORT || 4000;
 // adding middlewares
 app.use(express.json());
 app.use(cookieParser());
-const normalizeOrigin = (value = "") => value.trim().replace(/\/+$/, "");
-const toHost = (value = "") => {
-  const cleaned = normalizeOrigin(value);
-  if (!cleaned) return "";
-  try {
-    const withProtocol = /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
-    return new URL(withProtocol).host.toLowerCase();
-  } catch {
-    return cleaned.replace(/^https?:\/\//i, "").toLowerCase();
-  }
-};
-
-const allowedOrigins = (process.env.FRONTEND_BASE_URL || "")
-  .split(",")
-  .map(normalizeOrigin)
-  .filter(Boolean);
-const allowedHosts = allowedOrigins.map(toHost).filter(Boolean);
-const allowVercelPreviews = (process.env.ALLOW_VERCEL_PREVIEWS || "true").toLowerCase() === "true";
-const allowAllCors = (process.env.CORS_ALLOW_ALL || "false").toLowerCase() === "true";
-const isOriginAllowed = (origin = "") => {
-  if (!origin) return true;
-  if (allowAllCors) return true;
-  const normalizedOrigin = normalizeOrigin(origin);
-  const originHost = toHost(origin);
-  if (allowedOrigins.includes(normalizedOrigin) || allowedHosts.includes(originHost)) {
-    return true;
-  }
-  if (allowVercelPreviews && originHost.endsWith(".vercel.app")) {
-    return true;
-  }
-  return false;
-};
-
-// Set CORS headers explicitly so browser preflight always receives expected headers.
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && isOriginAllowed(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-    res.header("Vary", "Origin");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  }
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-  return next();
-});
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (isOriginAllowed(origin)) {
-      return callback(null, true);
-    }
-    // Avoid throwing from CORS middleware, which can surface as opaque 502/network errors in browsers.
-    console.warn(`CORS blocked for origin: ${origin}`);
-    return callback(null, false);
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// Keep CORS fully permissive to avoid deployment-domain/preflight mismatches.
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+app.options("*", cors());
 
 app.use(
     fileUpload({
