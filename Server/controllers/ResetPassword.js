@@ -3,7 +3,7 @@ const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const {passwordUpdated} = require("../mail/templates/passwordUpdate");
-const { passwordResetTemplate } = require("../mail/templates/passwordResetTemplate");
+const { passwordResetTemplate } = require("../mail/templates/PasswordResetTemplate");
 require("dotenv").config();
 
 
