@@ -103,7 +103,7 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
             error?.message === "Network Error" ||
             error?.code === "ERR_NETWORK" ||
             error?.code === "ECONNREFUSED";
-        toast.error(backendDown ? "Backend server is not running on port 3500" : message);
+        toast.error(backendDown ? "Backend server is unreachable. Please try again shortly" : message);
     }
     toast.dismiss(toastId);
 }

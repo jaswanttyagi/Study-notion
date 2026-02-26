@@ -107,7 +107,7 @@ export function login(email, password, navigate) {
       console.log("LOGIN API ERROR............", error)
       const message =
         error?.response?.data?.message ||
-        (error?.message === "Network Error" ? "Server unreachable. Start backend on port 3500." : "Login Failed")
+        (error?.message === "Network Error" ? "Server unreachable. Please try again shortly." : "Login Failed")
       toast.error(message)
     }
     dispatch(setLoading(false))
