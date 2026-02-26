@@ -44,9 +44,13 @@ const allowedOrigins = (process.env.FRONTEND_BASE_URL || "")
   .filter(Boolean);
 const allowedHosts = allowedOrigins.map(toHost).filter(Boolean);
 const allowVercelPreviews = (process.env.ALLOW_VERCEL_PREVIEWS || "true").toLowerCase() === "true";
+const allowAllCors = (process.env.CORS_ALLOW_ALL || "false").toLowerCase() === "true";
 
 const corsOptions = {
   origin: (origin, callback) => {
+    if (allowAllCors) {
+      return callback(null, true);
+    }
     // Allow server-to-server and same-origin requests with no Origin header.
     if (!origin) {
       return callback(null, true);
