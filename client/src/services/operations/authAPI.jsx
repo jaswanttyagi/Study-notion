@@ -27,6 +27,9 @@ export function sendOTP(email, navigate) {
       }
 
       toast.success("OTP Send Sucessfully")
+      if (response?.data?.otp) {
+        toast.success(`Use OTP: ${response.data.otp}`)
+      }
       if (typeof navigate === "function") {
         navigate("/verify-email")
       }

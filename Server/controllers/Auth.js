@@ -51,13 +51,28 @@ exports.sendOTP = async (req, res) => {
     await OTP.create(otpPayload);
     // calling otpTemplate and sending
     const emailBody = otpTemplate(otpPayload.otp);
-    const mailInfo = await mailSender(
-      email,
-      "OTP Verification Email",
-      emailBody
-    );
+    const otpFallbackToResponse =
+      (process.env.OTP_FALLBACK_TO_RESPONSE || "false").toLowerCase() === "true";
+    try {
+      const mailInfo = await mailSender(
+        email,
+        "OTP Verification Email",
+        emailBody
+      );
 
-    if (!mailInfo || !Array.isArray(mailInfo.accepted) || !mailInfo.accepted.includes(email)) {
+      if (!mailInfo || !Array.isArray(mailInfo.accepted) || !mailInfo.accepted.includes(email)) {
+        throw new Error("Email delivery not accepted by SMTP provider");
+      }
+    } catch (mailErr) {
+      console.error("sendOTP mail failure:", mailErr?.message || mailErr);
+      if (otpFallbackToResponse) {
+        return res.status(200).json({
+          success: true,
+          message: "OTP generated. Email failed, using fallback response OTP.",
+          otp,
+          mailDelivered: false,
+        });
+      }
       return res.status(500).json({
         success: false,
         message: "OTP created but email delivery failed. Please try again.",
@@ -67,13 +82,14 @@ exports.sendOTP = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "OTP Sent Sucessfully",
+      mailDelivered: true,
     })
 
   } catch (err) {
-    console.log(err);
+    console.log("sendOTP error:", err);
     res.status(500).json({
-      success: "false",
-      message: err.message,
+      success: false,
+      message: err.message || "Failed to generate OTP",
     })
   }
 };
