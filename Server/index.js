@@ -28,11 +28,31 @@ cloudinaryConnect();
 // adding middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_BASE_URL,
-  })
-)
+const normalizeOrigin = (value = "") => value.trim().replace(/\/+$/, "");
+const allowedOrigins = (process.env.FRONTEND_BASE_URL || "")
+  .split(",")
+  .map(normalizeOrigin)
+  .filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow server-to-server and same-origin requests with no Origin header.
+    if (!origin) {
+      return callback(null, true);
+    }
+    const normalizedOrigin = normalizeOrigin(origin);
+    if (allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(
     fileUpload({
