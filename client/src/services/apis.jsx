@@ -1,4 +1,10 @@
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const rawBaseUrl = import.meta.env.VITE_BASE_URL || "";
+const normalizedBaseUrl = rawBaseUrl.replace(/\/+$/, "");
+
+// If env is set to domain only, append API prefix expected by backend.
+const BASE_URL = normalizedBaseUrl.endsWith("/api/v1")
+  ? normalizedBaseUrl
+  : `${normalizedBaseUrl}/api/v1`;
 
 export const categories = {
     CATEGORIES_API: BASE_URL + "/course/showAllcategorys",
