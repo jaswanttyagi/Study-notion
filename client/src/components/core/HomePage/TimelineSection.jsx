@@ -3,7 +3,7 @@ import Logo1 from "../../../assest/TimeLineLogo/Logo1.svg"
 import Logo2 from "../../../assest/TimeLineLogo/Logo2.svg"
 import Logo3 from "../../../assest/TimeLineLogo/Logo3.svg"
 import Logo4 from "../../../assest/TimeLineLogo/Logo4.svg"
-import TimelineImage from "../../../assest/images/timelineImage.png"
+import TimelineImage from "../../../assest/images/TimelineImage.png"
 const TimelineSection = () => {
     const Timeline = [
         {
