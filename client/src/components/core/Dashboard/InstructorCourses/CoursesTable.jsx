@@ -46,6 +46,32 @@ export default function CoursesTable({ courses, setCourses }) {
     setLoading(false)
   }
 
+  const handleTiltMove = (event) => {
+    const card = event.currentTarget
+    const frame = card.querySelector(".course-media-frame")
+    if (!frame) return
+
+    const rect = card.getBoundingClientRect()
+    const px = (event.clientX - rect.left) / rect.width
+    const py = (event.clientY - rect.top) / rect.height
+
+    const rotateY = (px - 0.5) * 8
+    const rotateX = (0.5 - py) * 6
+
+    frame.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`
+    card.style.setProperty("--shine-x", `${px * 100}%`)
+    card.style.setProperty("--shine-y", `${py * 100}%`)
+  }
+
+  const handleTiltLeave = (event) => {
+    const card = event.currentTarget
+    const frame = card.querySelector(".course-media-frame")
+    if (!frame) return
+    frame.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)"
+    card.style.setProperty("--shine-x", `50%`)
+    card.style.setProperty("--shine-y", `50%`)
+  }
+
   return (
     <>
       <div className="w-full overflow-x-auto rounded-2xl border border-richblack-700/60 bg-richblack-800/20 p-2 shadow-[0_25px_80px_rgba(0,0,0,0.35)]">
@@ -74,19 +100,24 @@ export default function CoursesTable({ courses, setCourses }) {
                 </Td>
               </Tr>
             ) : (
-              courses?.map((course) => (
+              courses?.map((course, index) => (
                 <Tr
                   key={course._id}
-                  className="course-row-3d relative flex flex-col gap-4 border-b border-richblack-700/70 px-4 py-6 md:flex-row md:gap-x-10 md:px-6 md:py-8"
+                  className="course-row-3d course-reveal relative flex flex-col gap-4 border-b border-richblack-700/70 px-4 py-6 md:flex-row md:gap-x-10 md:px-6 md:py-8"
+                  style={{ "--row-index": index }}
+                  onMouseMove={handleTiltMove}
+                  onMouseLeave={handleTiltLeave}
                 >
-                  <div className="course-row-glow pointer-events-none absolute -left-6 top-0 h-full w-20 rounded-full" />
                   <Td className="flex flex-1 flex-col gap-4 sm:flex-row sm:gap-x-4">
-                    <img
-                      src={course?.thumbnail}
-                      alt={course?.courseName}
-                      className="h-[180px] w-full rounded-xl object-cover ring-1 ring-richblack-700 sm:h-[148px] sm:w-[220px]"
-                    />
-                    <div className="flex flex-col justify-between gap-2">
+                    <div className="course-media-frame relative aspect-[16/9] w-full sm:w-[320px]">
+                      <div className="course-media-shine pointer-events-none absolute inset-0 z-10" />
+                      <img
+                        src={course?.thumbnail}
+                        alt={course?.courseName}
+                        className="h-full w-full rounded-xl object-contain p-2"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-between gap-2 pt-1">
                       <p className="text-lg font-semibold text-richblack-5 drop-shadow-[0_1px_0_rgba(255,255,255,0.04)]">
                         {course.courseName}
                       </p>
