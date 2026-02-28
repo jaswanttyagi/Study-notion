@@ -9,6 +9,7 @@ import {
   addCourseDetails,
   editCourseDetails,
   fetchCourseCategories,
+  getAllCourses,
 } from "../../../../../services/operations/courseDetailsAPI"
 import { setCourse, setEditCourse, setStep } from "../../../../../Slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
@@ -40,10 +41,23 @@ export default function CourseInformationForm() {
     const getCategories = async() =>{
       setLoading(true);
       const categories = await fetchCourseCategories();
-    if(categories?.length>0){
-      setCourseCategories(categories);
-    }
-    setLoading(false);
+      if(categories?.length>0){
+        setCourseCategories(categories);
+        setLoading(false);
+        return
+      }
+
+      // Fallback: derive categories from published courses when category API returns empty.
+      const courses = await getAllCourses()
+      const fallbackMap = new Map()
+      ;(Array.isArray(courses) ? courses : []).forEach((course) => {
+        const category = course?.category
+        if (category && typeof category === "object" && category?._id && category?.name) {
+          fallbackMap.set(category._id, { _id: category._id, name: category.name })
+        }
+      })
+      setCourseCategories(Array.from(fallbackMap.values()))
+      setLoading(false);
     }
     if(editCourse && course){
       const existingPrice = course.price ?? course.Price ?? ""

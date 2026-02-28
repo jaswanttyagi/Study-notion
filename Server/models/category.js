@@ -8,10 +8,10 @@ const categorySchema = new mongoose.Schema({
     description : {
     type:String,    
     },
-    courses:{
+    courses:[{
         type:mongoose.Schema.Types.ObjectId,
         ref : "Courses",  // ye jha bhi ref dete vha objectId rkhte hai ham
-    },
+    }],
 });
 
 

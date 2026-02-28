@@ -27,8 +27,23 @@ function Catalog() {
         fetchCourseCategories(),
         getAllCourses(),
       ])
-      setCategories(Array.isArray(categoryData) ? categoryData : [])
-      setCourses(Array.isArray(courseData) ? courseData : [])
+      const safeCourses = Array.isArray(courseData) ? courseData : []
+      setCourses(safeCourses)
+
+      const directCategories = Array.isArray(categoryData) ? categoryData : []
+      if (directCategories.length > 0) {
+        setCategories(directCategories)
+      } else {
+        // Fallback: build category list from populated category objects in course data.
+        const fallbackMap = new Map()
+        safeCourses.forEach((course) => {
+          const category = course?.category
+          if (category && typeof category === "object" && category?._id && category?.name) {
+            fallbackMap.set(category._id, { _id: category._id, name: category.name })
+          }
+        })
+        setCategories(Array.from(fallbackMap.values()))
+      }
       setLoading(false)
     }
 
