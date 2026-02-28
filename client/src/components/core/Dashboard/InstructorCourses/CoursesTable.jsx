@@ -48,10 +48,10 @@ export default function CoursesTable({ courses, setCourses }) {
 
   return (
     <>
-      <div className="w-full overflow-x-auto">
-        <Table className="courses-table w-full min-w-[300px] rounded-xl border border-richblack-800">
+      <div className="w-full overflow-x-auto rounded-2xl border border-richblack-700/60 bg-richblack-800/20 p-2 shadow-[0_25px_80px_rgba(0,0,0,0.35)]">
+        <Table className="courses-table w-full min-w-[300px] rounded-xl border border-richblack-800/80">
           <Thead>
-            <Tr className="hidden gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2 md:flex">
+            <Tr className="hidden gap-x-10 rounded-t-md border-b border-b-richblack-700 bg-richblack-900/70 px-6 py-3 md:flex">
               <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">
                 Courses
               </Th>
@@ -77,16 +77,17 @@ export default function CoursesTable({ courses, setCourses }) {
               courses?.map((course) => (
                 <Tr
                   key={course._id}
-                  className="flex flex-col gap-4 border-b border-richblack-800 px-4 py-6 md:flex-row md:gap-x-10 md:px-6 md:py-8"
+                  className="course-row-3d relative flex flex-col gap-4 border-b border-richblack-700/70 px-4 py-6 md:flex-row md:gap-x-10 md:px-6 md:py-8"
                 >
+                  <div className="course-row-glow pointer-events-none absolute -left-6 top-0 h-full w-20 rounded-full" />
                   <Td className="flex flex-1 flex-col gap-4 sm:flex-row sm:gap-x-4">
                     <img
                       src={course?.thumbnail}
                       alt={course?.courseName}
-                      className="h-[180px] w-full rounded-lg object-cover sm:h-[148px] sm:w-[220px]"
+                      className="h-[180px] w-full rounded-xl object-cover ring-1 ring-richblack-700 sm:h-[148px] sm:w-[220px]"
                     />
                     <div className="flex flex-col justify-between gap-2">
-                      <p className="text-lg font-semibold text-richblack-5">
+                      <p className="text-lg font-semibold text-richblack-5 drop-shadow-[0_1px_0_rgba(255,255,255,0.04)]">
                         {course.courseName}
                       </p>
                       <p className="text-xs text-richblack-300">
@@ -98,16 +99,16 @@ export default function CoursesTable({ courses, setCourses }) {
                               .join(" ") + "..."
                           : course.courseDescription}
                       </p>
-                      <p className="text-[12px] text-white">
+                      <p className="text-[12px] text-richblack-25">
                         Created: {formattedDate(course.createdAt)}
                       </p>
                       {course.status === COURSE_STATUS.DRAFT ? (
-                        <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-pink-100">
+                        <p className="flex w-fit flex-row items-center gap-2 rounded-full border border-richblack-500 bg-richblack-700/80 px-2 py-[2px] text-[12px] font-medium text-pink-100">
                           <HiClock size={14} />
                           Drafted
                         </p>
                       ) : (
-                        <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
+                        <p className="flex w-fit flex-row items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/10 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
                           <div className="flex h-3 w-3 items-center justify-center rounded-full bg-yellow-100 text-richblack-700">
                             <FaCheck size={8} />
                           </div>
@@ -132,7 +133,7 @@ export default function CoursesTable({ courses, setCourses }) {
                         navigate(`/dashboard/edit-course/${course._id}`)
                       }}
                       title="Edit"
-                      className="px-2 transition-all duration-200 hover:scale-110 hover:text-caribbeangreen-300"
+                      className="rounded-lg border border-richblack-600/80 bg-richblack-700/70 px-2 py-1 transition-all duration-200 hover:-translate-y-[1px] hover:scale-105 hover:border-caribbeangreen-400/40 hover:text-caribbeangreen-300"
                     >
                       <FiEdit2 size={20} />
                     </button>
@@ -154,7 +155,7 @@ export default function CoursesTable({ courses, setCourses }) {
                         })
                       }}
                       title="Delete"
-                      className="px-1 transition-all duration-200 hover:scale-110 hover:text-[#ff0000]"
+                      className="ml-2 rounded-lg border border-richblack-600/80 bg-richblack-700/70 px-2 py-1 transition-all duration-200 hover:-translate-y-[1px] hover:scale-105 hover:border-pink-300/40 hover:text-[#ff5555]"
                     >
                       <RiDeleteBin6Line size={20} />
                     </button>

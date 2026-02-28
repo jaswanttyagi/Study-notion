@@ -11,3 +11,64 @@
 .courses-table td:nth-of-type(1) .tdBefore {
   display: none !important;
 }
+
+.course-hero {
+  background:
+    radial-gradient(1200px 320px at 10% -10%, rgba(34, 211, 238, 0.18), transparent 55%),
+    radial-gradient(900px 300px at 95% 110%, rgba(59, 130, 246, 0.16), transparent 50%),
+    linear-gradient(135deg, rgba(2, 6, 23, 0.92), rgba(15, 23, 42, 0.88));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.course-hero-glow {
+  filter: blur(42px);
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.35), rgba(34, 211, 238, 0));
+}
+
+.course-kpi-card {
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.55));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
+    0 10px 30px rgba(0, 0, 0, 0.28);
+  padding: 1rem 1.1rem;
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.course-kpi-card:hover {
+  transform: translateY(-3px) perspective(700px) rotateX(3deg);
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.course-row-3d {
+  background: linear-gradient(145deg, rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.5));
+  transform-style: preserve-3d;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.course-row-3d:hover {
+  transform: translateY(-2px) perspective(900px) rotateX(2deg);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.course-row-glow {
+  filter: blur(20px);
+  background: radial-gradient(circle at center, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0));
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.course-row-3d:hover .course-row-glow {
+  opacity: 1;
+}
