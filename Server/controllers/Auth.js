@@ -16,6 +16,9 @@ const getSafeMailErrorMessage = (error) => {
   if (code === "EAUTH" || responseCode === 535 || responseCode === 534) {
     return "Email service authentication failed. Please verify SMTP credentials.";
   }
+  if (code === "SMTP_CONFIG_MISSING") {
+    return "Email service is not configured. Please set SMTP credentials in server environment.";
+  }
   if (code === "ECONNECTION" || code === "ETIMEDOUT") {
     return "Email service connection timed out. Please try again shortly.";
   }
@@ -77,7 +80,11 @@ exports.sendOTP = async (req, res) => {
         emailBody
       );
 
-      if (!mailInfo || !Array.isArray(mailInfo.accepted) || !mailInfo.accepted.includes(email)) {
+      const acceptedRecipients = Array.isArray(mailInfo?.accepted)
+        ? mailInfo.accepted.map((value) => String(value).trim().toLowerCase())
+        : [];
+
+      if (!mailInfo || !acceptedRecipients.includes(email)) {
         throw new Error("Email delivery not accepted by SMTP provider");
       }
     } catch (mailErr) {
@@ -353,6 +360,24 @@ exports.changePassword = async (req, res) => {
     res.status(500).json({
       success:false,
       message:err.message,
+    });
+  }
+};
+
+exports.healthMail = async (req, res) => {
+  try {
+    const result = await mailSender.verifyConnection();
+    return res.status(200).json({
+      success: true,
+      message: "Mail service is healthy",
+      connection: result,
+    });
+  } catch (error) {
+    console.error("Mail health check failed:", error?.message || error);
+    return res.status(500).json({
+      success: false,
+      message: getSafeMailErrorMessage(error),
+      code: error?.code || "MAIL_HEALTH_FAILED",
     });
   }
 };

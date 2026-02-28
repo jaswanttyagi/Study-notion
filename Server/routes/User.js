@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // import the handler
-const {signup , Login , sendOTP , changePassword } = require("../controllers/Auth");
+const {signup , Login , sendOTP , changePassword, healthMail } = require("../controllers/Auth");
 
 const{resetPasswordToken , resetPassword} = require("../controllers/ResetPassword");
 
@@ -25,6 +25,7 @@ console.log("resetPasswordToken =>", resetPasswordToken);
 router.post("/signup" , signup);
 router.post("/Login" , Login);
 router.post("/sendOTP" , sendOTP);
+router.get("/health-mail", healthMail);
 router.post("/changePassword" , auth , changePassword);
 
 // ********************************************************************************************************
