@@ -147,3 +147,39 @@
     transform: translateY(0) scale(1);
   }
 }
+
+@media (max-width: 767px) {
+  .course-row-3d::after {
+    left: -0.75rem;
+    width: 3.25rem;
+    filter: blur(14px);
+  }
+
+  .course-row-3d::before {
+    background: radial-gradient(
+      circle 220px at var(--shine-x) var(--shine-y),
+      rgba(56, 189, 248, 0.1),
+      rgba(56, 189, 248, 0) 60%
+    );
+  }
+
+  .course-media-frame {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .course-row-3d,
+  .course-media-frame,
+  .course-media-shine,
+  .course-row-3d::before,
+  .course-row-3d::after {
+    transition: none !important;
+  }
+}

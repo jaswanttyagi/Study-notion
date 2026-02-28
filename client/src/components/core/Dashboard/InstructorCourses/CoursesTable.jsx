@@ -103,13 +103,13 @@ export default function CoursesTable({ courses, setCourses }) {
               courses?.map((course, index) => (
                 <Tr
                   key={course._id}
-                  className="course-row-3d course-reveal relative flex flex-col gap-4 border-b border-richblack-700/70 px-4 py-6 md:flex-row md:gap-x-10 md:px-6 md:py-8"
+                  className="course-row-3d course-reveal relative flex flex-col gap-5 border-b border-richblack-700/70 px-3 py-5 sm:px-4 md:flex-row md:gap-x-8 md:px-6 md:py-7 lg:items-center"
                   style={{ "--row-index": index }}
                   onMouseMove={handleTiltMove}
                   onMouseLeave={handleTiltLeave}
                 >
-                  <Td className="flex flex-1 flex-col gap-4 sm:flex-row sm:gap-x-4">
-                    <div className="course-media-frame relative aspect-[16/9] w-full sm:w-[320px]">
+                  <Td className="flex flex-1 flex-col gap-4 sm:gap-5 md:flex-row">
+                    <div className="course-media-frame relative mx-auto aspect-[16/9] w-full sm:mx-0 sm:w-[280px] md:w-[320px] lg:w-[360px]">
                       <div className="course-media-shine pointer-events-none absolute inset-0 z-10" />
                       <img
                         src={course?.thumbnail}
@@ -118,10 +118,10 @@ export default function CoursesTable({ courses, setCourses }) {
                       />
                     </div>
                     <div className="flex flex-col justify-between gap-2 pt-1">
-                      <p className="text-lg font-semibold text-richblack-5 drop-shadow-[0_1px_0_rgba(255,255,255,0.04)]">
+                      <p className="text-base font-semibold text-richblack-5 drop-shadow-[0_1px_0_rgba(255,255,255,0.04)] sm:text-lg">
                         {course.courseName}
                       </p>
-                      <p className="text-xs text-richblack-300">
+                      <p className="text-xs leading-5 text-richblack-300">
                         {course.courseDescription.split(" ").length >
                         TRUNCATE_LENGTH
                           ? course.courseDescription
@@ -148,16 +148,17 @@ export default function CoursesTable({ courses, setCourses }) {
                       )}
                     </div>
                   </Td>
-                  <Td className="text-sm font-medium text-richblack-100">
+                  <Td className="text-sm font-medium text-richblack-100 md:min-w-[120px]">
                     <span className="mb-1 block text-xs uppercase text-richblack-300 md:hidden">Duration</span>
                     {getDisplayDuration(course?.totalDuration)}
                   </Td>
-                  <Td className="text-sm font-medium text-richblack-100">
+                  <Td className="text-sm font-medium text-richblack-100 md:min-w-[110px]">
                     <span className="mb-1 block text-xs uppercase text-richblack-300 md:hidden">Price</span>
                     Rs. {course.price}
                   </Td>
-                  <Td className="text-sm font-medium text-richblack-100">
+                  <Td className="text-sm font-medium text-richblack-100 md:min-w-[120px]">
                     <span className="mb-1 block text-xs uppercase text-richblack-300 md:hidden">Actions</span>
+                    <div className="flex items-center gap-2">
                     <button
                       disabled={loading}
                       onClick={() => {
@@ -186,10 +187,11 @@ export default function CoursesTable({ courses, setCourses }) {
                         })
                       }}
                       title="Delete"
-                      className="ml-2 rounded-lg border border-richblack-600/80 bg-richblack-700/70 px-2 py-1 transition-all duration-200 hover:-translate-y-[1px] hover:scale-105 hover:border-pink-300/40 hover:text-[#ff5555]"
+                      className="rounded-lg border border-richblack-600/80 bg-richblack-700/70 px-2 py-1 transition-all duration-200 hover:-translate-y-[1px] hover:scale-105 hover:border-pink-300/40 hover:text-[#ff5555]"
                     >
                       <RiDeleteBin6Line size={20} />
                     </button>
+                    </div>
                   </Td>
                 </Tr>
               ))
