@@ -6,10 +6,10 @@ import { TypeAnimation } from 'react-type-animation';
 
 const CodeBlocks = ({position , heading , subheading , ctabtn1 , ctabtn2 , codeblock , backgroundGradient , codeColor}) => {
   return (
-    <div className={`flex ${position} my-12 sm:my-16 lg:my-20 justify-between items-center gap-8 lg:gap-12 w-full`}>
+    <div className={`flex ${position} my-12 sm:my-16 lg:my-20 justify-between items-center gap-8 lg:gap-50 w-full`}>
 
         {/* section 1 */}
-        <div className='w-full lg:w-[48%] flex flex-col gap-6 sm:gap-8'>
+        <div className='w-full lg:w-[80%] flex flex-col gap-6 sm:gap-8'>
             {heading}
             <div className='text-richblack-300 text-sm sm:text-base lg:font-bold '>
                 {subheading}
@@ -17,7 +17,7 @@ const CodeBlocks = ({position , heading , subheading , ctabtn1 , ctabtn2 , codeb
 
             {/* buttons */}
 
-            <div className='flex flex-wrap gap-4 sm:gap-7 mt-4 sm:mt-7 '>
+            <div className='flex flex-wrap lg:flex-nowrap gap-4 sm:gap-7 mt-4 sm:mt-7 '>
                 <CTAButton active={ctabtn1.active} linkto={ctabtn1.linkto}>
                     <div className='flex gap-2 items-center'>
                         {ctabtn1.btnText}

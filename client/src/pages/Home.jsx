@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       {/* section 1 */}
-      <section className='relative mt-10 sm:mt-14 p-1 mx-auto flex flex-col w-11/12 items-center text-white justify-between max-w-maxContent'>
+      <section className='relative mt-10 sm:mt-14 lg:mt-16 p-1 mx-auto flex flex-col w-11/12 items-center text-white justify-between max-w-maxContent'>
         <Link to={"/signup"}>
           <div className='mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 w-fit'>
             <div className='flex flex-row items-center gap-2 rounded-full px-5 py-2.5 sm:px-10 sm:py-3 group-hover:bg-richblack-900 text-sm sm:text-base'>
@@ -47,7 +47,7 @@ const Home = () => {
         </div>
 
         {/* video */}
-        <div className='shadow-blue-200 shadow-[10px_-7px_60px_-5px] w-full sm:w-[95%] mx-2 sm:mx-6 my-8 sm:my-12'>
+        <div className='shadow-blue-200 shadow-[10px_-7px_60px_-5px] w-full sm:w-[95%] lg:w-auto mx-2 sm:mx-6 my-8 sm:my-12'>
           <video className='w-full rounded-md shadow-[8px_8px_rgba(255,255,255)] sm:shadow-[20px_20px_rgba(255,255,255)]' muted loop autoPlay={true}>
             <source src={Banner} type="video/mp4" />
           </video>
@@ -57,7 +57,7 @@ const Home = () => {
 
         <div>
           <CodeBlocks
-            position={"flex-col lg:flex-row"}
+            position={"flex-col lg:flex-row relative lg:left-[-2%]"}
             heading={
               <div className='w-full text-2xl sm:text-3xl lg:text-4xl font-semibold'>
                 Unlock Your <HighlightText text={"Coding Potential "} />
@@ -91,9 +91,9 @@ const Home = () => {
         {/* code section 2 */}
         <div>
           <CodeBlocks
-            position={"flex-col lg:flex-row-reverse"}
+            position={"flex-col lg:flex-row-reverse relative lg:right-[5%]"}
             heading={
-              <div className='w-full text-2xl sm:text-3xl lg:text-4xl font-semibold'>
+              <div className='w-full lg:w-[130%] text-2xl sm:text-3xl lg:text-4xl font-semibold'>
                 Start<HighlightText text={"Coding in Seconds "} />
                 with Our Online Courses
               </div>
@@ -129,9 +129,9 @@ const Home = () => {
 
       <section className='bg-pure-greys-5 text-richblack-700'>
         {/* for buttons */}
-        <div className='homepage_bg min-h-[260px] sm:min-h-[310px]'>
+        <div className='homepage_bg min-h-[260px] sm:min-h-[310px] lg:h-[310px]'>
           <div className='w-11/12 max-w-maxContent flex flex-col items-center gap-5 mx-auto'>
-            <div className='h-[90px] sm:h-[150px]'></div>
+            <div className='h-[90px] sm:h-[120px] lg:h-[150px]'></div>
 
             <div className='flex flex-row gap-7 text-white'>
               {/* buttons */}
@@ -156,13 +156,13 @@ const Home = () => {
 
         {/* for content */}
         <div className='flex flex-col mx-auto w-11/12 items-center justify-between max-w-maxContent gap-7'>
-          <div className='flex flex-col lg:flex-row justify-between gap-8 mb-10 mt-12 sm:mt-16 lg:mt-20 lg:gap-10'>
+          <div className='flex flex-col lg:flex-row justify-between gap-8 lg:gap-7 mb-10 mt-12 sm:mt-16 lg:mt-[95px]'>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold lg:w-[45%] ">
               Get the skills you need for a{" "}
               <HighlightText text={"job that is in demand."} />
             </div>
 
-            <div className='flex flex-col w-full lg:w-[40%] gap-8 items-start'>
+            <div className='flex flex-col w-full lg:w-[40%] gap-8 lg:gap-10 items-start'>
               <div className='text-[15px] sm:text-[16px]'>
                 The modern StudyNotion is the dictates its own terms. Today, to
                 be a competitive specialist requires more than professional

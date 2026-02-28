@@ -19,10 +19,16 @@ const LearningLanguageSection = () => {
               and more.
             </div>
 
-            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-0 items-center justify-center mt-5'>
-                <img src={Know_your_progress} alt="know your progress" className='object-contain w-full max-w-[280px] mx-auto sm:mr-[-40px]' />
-                <img src={Compare_with_others} alt="compare with others" className='object-contain w-full max-w-[280px] mx-auto sm:-mt-8' />
-                <img src={Plan_your_lessons} alt="plan your lessons" className='object-contain w-full max-w-[280px] mx-auto sm:ml-[-50px]' />
+            <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-0 items-center justify-center mt-5 lg:hidden'>
+                <img src={Know_your_progress} alt="know your progress" className='object-contain w-full max-w-[280px] mx-auto' />
+                <img src={Compare_with_others} alt="compare with others" className='object-contain w-full max-w-[280px] mx-auto' />
+                <img src={Plan_your_lessons} alt="plan your lessons" className='object-contain w-full max-w-[280px] mx-auto' />
+            </div>
+
+            <div className='hidden lg:flex flex-row items-center justify-center mt-5'>
+                <img src={Know_your_progress} alt="know your progress" className='object-contain -mr-32' />
+                <img src={Compare_with_others} alt="compare with others" className='object-contain -mt-12' />
+                <img src={Plan_your_lessons} alt="plan your lessons" className='object-contain -ml-36' />
             </div>
             
       </div>

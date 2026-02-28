@@ -57,7 +57,7 @@ const ExploreSection = () => {
 
             {/* cards */}
              <div className='mt-10'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:hidden'>
                     {
                         courses.map( (value , index)=>{
                             return(
@@ -70,6 +70,21 @@ const ExploreSection = () => {
                             )
                         })
                     }
+                </div>
+
+                <div className='hidden lg:block lg:h-[200px]'>
+                    <div className='absolute flex flex-row gap-10 justify-between w-full mt-10'>
+                        {
+                            courses.map((value, index) => (
+                                <CourseCard
+                                    key={index}
+                                    cardData={value}
+                                    currentCard={currentCard}
+                                    setCurrentCard={setCurrentCard}
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
              </div>
 
