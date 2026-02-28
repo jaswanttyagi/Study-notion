@@ -6,8 +6,8 @@ import Plan_your_lessons from "../../../assest/images/Plan_your_lessons.png";
 import CTAButton from '../HomePage/CTAButton';
 const LearningLanguageSection = () => {
   return (
-    <div className='mt-16 sm:mt-24 lg:mt-[150px] w-full'>
-      <div className='w-full flex flex-col gap-5'>
+    <div className='mt-16 sm:mt-24 lg:mt-[150px]'>
+      <div className='w-full lg:w-11/12 flex flex-col gap-5'>
         <div className='text-2xl sm:text-3xl lg:text-4xl font-semibold text-center'>
             Your Knife Swiss for
             <HighlightText text={" Learning Languages"} />

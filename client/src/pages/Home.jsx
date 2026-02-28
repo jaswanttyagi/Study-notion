@@ -32,7 +32,7 @@ const Home = () => {
           <HighlightText text={"Coding Skills"} />
         </div>
 
-        <div className="mt-3 w-full md:w-[90%] text-center text-sm sm:text-base lg:text-lg font-bold text-richblack-300">
+        <div className="mt-3 w-full md:w-[90%] lg:w-[90%] text-center text-sm sm:text-base lg:text-lg font-bold text-richblack-300">
           With our online coding courses, you can learn at your own pace, from
           anywhere in the world, and get access to a wealth of resources,
           including hands-on projects, quizzes, and personalized feedback from
@@ -40,14 +40,14 @@ const Home = () => {
         </div>
 
         {/* buttons */}
-        <div className='flex flex-wrap justify-center gap-4 sm:gap-7 mt-8'>
+        <div className='flex flex-wrap lg:flex-nowrap justify-center gap-4 sm:gap-7 mt-8'>
           <CTAButton active={true} linkto={"/signup"}>Learn More</CTAButton>
 
           <CTAButton active={false} linkto={"/login"}>Book a Demo</CTAButton>
         </div>
 
         {/* video */}
-        <div className='shadow-blue-200 shadow-[10px_-7px_60px_-5px] w-full sm:w-[95%] lg:w-auto mx-2 sm:mx-6 my-8 sm:my-12'>
+        <div className='shadow-blue-200 shadow-[10px_-7px_60px_-5px] w-full sm:w-[95%] lg:w-auto mx-2 sm:mx-6 lg:mx-6 my-8 sm:my-12 lg:my-12'>
           <video className='w-full rounded-md shadow-[8px_8px_rgba(255,255,255)] sm:shadow-[20px_20px_rgba(255,255,255)]' muted loop autoPlay={true}>
             <source src={Banner} type="video/mp4" />
           </video>
@@ -135,7 +135,7 @@ const Home = () => {
 
             <div className='flex flex-row gap-7 text-white'>
               {/* buttons */}
-              <div className='flex flex-wrap justify-center gap-4 sm:gap-7 mt-8'>
+              <div className='flex flex-wrap lg:flex-nowrap justify-center gap-4 sm:gap-7 mt-8'>
                 <CTAButton active={true} linkto={"/signup"}>
                   <div className='flex gap-2 items-center'>
                     Explore Full Catalog
@@ -156,7 +156,7 @@ const Home = () => {
 
         {/* for content */}
         <div className='flex flex-col mx-auto w-11/12 items-center justify-between max-w-maxContent gap-7'>
-          <div className='flex flex-col lg:flex-row justify-between gap-8 lg:gap-7 mb-10 mt-12 sm:mt-16 lg:mt-[95px]'>
+          <div className='flex flex-col lg:flex-row justify-between gap-8 lg:gap-0 mb-10 mt-12 sm:mt-16 lg:mt-20'>
             <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold lg:w-[45%] ">
               Get the skills you need for a{" "}
               <HighlightText text={"job that is in demand."} />

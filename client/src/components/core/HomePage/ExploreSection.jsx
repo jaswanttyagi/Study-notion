@@ -33,7 +33,7 @@ const ExploreSection = () => {
             </div>
 
             {/* tabs */}
-            <div className="flex flex-row items-center justify-center gap-2 flex-wrap rounded-2xl sm:rounded-full bg-richblack-800 p-2">
+            <div className="flex flex-row items-center justify-center gap-2 flex-wrap rounded-2xl sm:rounded-full lg:rounded-full bg-richblack-800 p-2 lg:p-0">
                 {
                     tabName.map((value, index) => {
                         return (
@@ -73,7 +73,7 @@ const ExploreSection = () => {
                 </div>
 
                 <div className='hidden lg:block lg:h-[200px]'>
-                    <div className='absolute flex flex-row gap-10 justify-between w-full mt-10'>
+                    <div className='absolute flex flex-row gap-10 justify-between w-full lg:left-[-0%] mt-10'>
                         {
                             courses.map((value, index) => (
                                 <CourseCard

@@ -29,7 +29,7 @@ const TimelineSection = () => {
     ];
     return (
         <div className='w-full'>
-            <div className='flex flex-col lg:flex-row gap-10 lg:gap-12 items-start lg:items-center'>
+            <div className='flex flex-col lg:flex-row gap-10 lg:gap-15 items-start lg:items-center'>
                 {/* left box div */}
                 <div className='w-full lg:w-[45%] flex flex-col gap-5'>
                     {
@@ -55,7 +55,7 @@ const TimelineSection = () => {
                 {/* right box div */}
 
                 <div className='relative w-full lg:w-[52%] shadow-blue-200'>
-                    <img src={TimelineImage} alt="TimelineImage" className='w-full rounded-xl' />
+                    <img src={TimelineImage} alt="TimelineImage" className='w-full rounded-xl lg:rounded-none' />
 
                     <div className='relative lg:absolute mt-4 lg:mt-0 bg-caribbeangreen-700 flex flex-col sm:flex-row text-white uppercase py-5 sm:py-7 lg:py-10 left-[-10%] lg:translate-x-[30%] lg:translate-y-[-35%] rounded-md lg:rounded-none'>
 
