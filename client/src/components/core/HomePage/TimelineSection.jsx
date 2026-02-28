@@ -28,21 +28,21 @@ const TimelineSection = () => {
         },
     ];
     return (
-        <div>
-            <div className='flex flex-row gap-15 items-center'>
+        <div className='w-full'>
+            <div className='flex flex-col lg:flex-row gap-10 lg:gap-14 items-start lg:items-center'>
                 {/* left box div */}
-                <div className='w-[45%] flex flex-col gap-5'>
+                <div className='w-full lg:w-[45%] flex flex-col gap-5'>
                     {
                         Timeline.map((element, index) => {
                             return (
                                 <div className='flex flex-row gap-6' key={index}>
-                                    <div className='w-[50px] h-[50px] bg-white flex items-center'>
+                                    <div className='w-[50px] h-[50px] shrink-0 bg-white flex items-center justify-center rounded-full'>
                                         <img src={element.Logo} alt="" />
                                     </div>
 
                                     <div>
-                                        <h2 className='text-[18px] font-semibold'>{element.Heading}</h2>
-                                        <p className='text-base'>{element.Description}</p>
+                                        <h2 className='text-[16px] sm:text-[18px] font-semibold'>{element.Heading}</h2>
+                                        <p className='text-sm sm:text-base'>{element.Description}</p>
                                     </div>
 
                                 </div>
@@ -54,18 +54,18 @@ const TimelineSection = () => {
 
                 {/* right box div */}
 
-                <div className='relative shadow-blue-200'>
-                    <img src={TimelineImage} alt="TimelineImage" />
+                <div className='relative w-full lg:w-[52%] shadow-blue-200'>
+                    <img src={TimelineImage} alt="TimelineImage" className='w-full rounded-xl' />
 
-                    <div className='absolute bg-caribbeangreen-700 flex flex-row text-white uppercase py-10 left-[-10%] translate-x-[30%] translate-y-[-35%]'>
+                    <div className='relative lg:absolute mt-4 lg:mt-0 bg-caribbeangreen-700 flex flex-col sm:flex-row text-white uppercase py-5 sm:py-7 lg:py-10 left-[-10%] lg:translate-x-[30%] lg:translate-y-[-35%] rounded-md'>
 
-                        <div className='flex flex-row gap-5 items-center border-caribbeangreen-300 px-7'>
-                            <p className='text-3xl font-bold'>10</p>
+                        <div className='flex flex-row gap-5 items-center border-caribbeangreen-300 px-5 sm:px-7 pb-4 sm:pb-0 sm:border-r border-caribbeangreen-300'>
+                            <p className='text-2xl sm:text-3xl font-bold'>10</p>
                             <p className='text-caribbeangreen-300 text-sm'>Years of Experience</p>
                         </div>
 
-                        <div className='flex  gap-5 items-center  px-7'>
-                            <p className='text-3xl font-bold'>250</p>
+                        <div className='flex  gap-5 items-center px-5 sm:px-7'>
+                            <p className='text-2xl sm:text-3xl font-bold'>250</p>
                             <p className='text-caribbeangreen-300 text-sm'>Type of Courses</p>
                         </div>
                     </div>
