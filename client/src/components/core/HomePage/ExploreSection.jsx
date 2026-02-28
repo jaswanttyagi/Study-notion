@@ -21,26 +21,26 @@ const ExploreSection = () => {
         setCurrentCard(result[0].courses[0].heading);
     }
     return (
-        <div className='w-full'>
+        <div>
             <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-center my-10">
+                <div className="text-4xl font-semibold text-center my-10">
                     Unlock the
                     <HighlightText text={"Power of Code"} />
-                    <p className="text-center text-richblack-300 text-sm sm:text-base lg:text-lg font-semibold mt-1">
+                    <p className="text-center text-richblack-300 text-lg font-semibold mt-1">
                         Learn to Build Anything You Can Imagine
                     </p>
                 </div>
             </div>
 
             {/* tabs */}
-            <div className="flex flex-row items-center justify-center gap-2 flex-wrap rounded-2xl sm:rounded-full lg:rounded-full bg-richblack-800 p-2 lg:p-0">
+            <div className="flex flex-row items-center justify-center gap-2 flex-wrap rounded-full bg-richblack-800">
                 {
                     tabName.map((value, index) => {
                         return (
                             <div
                                 key={index}
                                 onClick={() => setMycards(value)}
-                                className={`text-xs sm:text-sm lg:text-[16px] flex flex-row items-center gap-2 rounded-full 
+                                className={`text-[16px] flex flex-row items-center gap-2 rounded-full 
             transition-all duration-200 cursor-pointer px-7 py-2
             ${currentTab === value
                                         ? "bg-richblack-900 text-richblack-5 font-medium"
@@ -56,17 +56,20 @@ const ExploreSection = () => {
             </div>
 
             {/* cards */}
-             <div className='mt-10 w-full'>
-                <div className='flex flex-col gap-6 lg:flex-row lg:items-stretch lg:justify-between lg:gap-8'>
+             <div className='lg:h-[200px]'>
+
+                <div className='absolute flex flex-row gap-10 justify-between w-full lg:left-[-0%] mt-10'>
                     {
-                        courses.map((value, index) => (
-                            <CourseCard
+                        courses.map( (value , index)=>{
+                            return(
+                                <CourseCard
                                 key={index}
                                 cardData={value}
                                 currentCard={currentCard}
                                 setCurrentCard={setCurrentCard}
-                            />
-                        ))
+                                />
+                            )
+                        })
                     }
                 </div>
              </div>

@@ -7,20 +7,20 @@ import { FaArrowRight } from 'react-icons/fa';
 
 const InstructorSection = () => {
   return (
-    <div className='mt-8 sm:mt-12 lg:mt-16 w-full'>
-      <div className='flex flex-col lg:flex-row items-center gap-8 lg:gap-20'>
+    <div className='mt-16'>
+      <div className='flex flex-row items-center gap-20'>
 
-        <div className='w-full lg:w-[50%]'>
-            <img src={Instructor} alt="Instructor" className='w-full max-w-[560px] lg:max-w-none mx-auto shadow-white shadow-[-10px_-10px_0_0] sm:shadow-[-20px_-20px_0_0]'/>
+        <div className='w-[50%]'>
+            <img src={Instructor} alt="" className='shadow-white shadow-[-20px_-20px_0_0]'/>
         </div>
-        <div className='w-full lg:w-[50%] flex flex-col gap-6 sm:gap-8 lg:gap-10'>
+        <div className='w-[50%] flex flex-col gap-10'>
 
-              <h1 className="w-full lg:w-[50%] text-2xl sm:text-3xl lg:text-4xl font-semibold ">
+              <h1 className="lg:w-[50%] text-4xl font-semibold ">
               Become an
               <HighlightText text={"instructor"} />
             </h1>
 
-            <p className="font-medium text-[15px] sm:text-[16px] text-justify w-full lg:w-[90%] text-richblack-300">
+            <p className="font-medium text-[16px] text-justify w-[90%] text-richblack-300">
               Instructors from around the world teach millions of students on
               StudyNotion. We provide the tools and skills to teach what you
               love.
