@@ -371,6 +371,7 @@ exports.healthMail = async (req, res) => {
       success: true,
       message: "Mail service is healthy",
       connection: result,
+      diagnostics: mailSender.getDiagnostics?.(),
     });
   } catch (error) {
     console.error("Mail health check failed:", error?.message || error);
@@ -378,6 +379,8 @@ exports.healthMail = async (req, res) => {
       success: false,
       message: getSafeMailErrorMessage(error),
       code: error?.code || "MAIL_HEALTH_FAILED",
+      diagnostics: mailSender.getDiagnostics?.(),
+      attempts: Array.isArray(error?.attempts) ? error.attempts : [],
     });
   }
 };
