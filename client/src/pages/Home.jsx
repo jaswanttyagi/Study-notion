@@ -13,8 +13,16 @@ import InstructorSection from '../components/core/HomePage/InstructorSection'
 import ExploreSection from '../components/core/HomePage/ExploreSection';
 import Footer from "../components/core/HomePage/common/Footer"
 import ReviewSlider from "../components/core/HomePage/common/ReviewSlider"
+import MobileHome from './MobileHome';
+import useIsSmallDevice from "../hooks/useIsSmallDevice";
 
 const Home = () => {
+  const isSmallDevice = useIsSmallDevice();
+
+  if (isSmallDevice) {
+    return <MobileHome />;
+  }
+
   return (
     <div>
       {/* section 1 */}
