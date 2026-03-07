@@ -56,17 +56,16 @@ const ExploreSection = () => {
             </div>
 
             {/* cards */}
-             <div className='lg:h-[200px]'>
-
-                <div className='absolute flex flex-row gap-10 justify-between w-full lg:left-[-0%] mt-10'>
+             <div className='mt-10 w-full'>
+                <div className='flex flex-col gap-6 lg:flex-row lg:items-stretch lg:justify-between lg:gap-8'>
                     {
-                        courses.map( (value , index)=>{
-                            return(
+                        courses.map((value, index) => {
+                            return (
                                 <CourseCard
-                                key={index}
-                                cardData={value}
-                                currentCard={currentCard}
-                                setCurrentCard={setCurrentCard}
+                                  key={index}
+                                  cardData={value}
+                                  currentCard={currentCard}
+                                  setCurrentCard={setCurrentCard}
                                 />
                             )
                         })
