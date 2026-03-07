@@ -64,14 +64,14 @@ const Signupform = () => {
       </div>
 
       <form onSubmit={submitHandler}>
-        <div className='flex gap-x-5 justify-between mt-5'>
-          <label>
+        <div className='mt-5 flex flex-col gap-4 sm:flex-row sm:gap-x-5 sm:justify-between'>
+          <label className='w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>first name <sup className='text-pink-200'>*</sup></p>
             <input required type="text" name="firstName" placeholder="Enter first name" value={formData.firstName} onChange={changeHandler}
               className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white' />
           </label>
 
-          <label>
+          <label className='w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>last name <sup className='text-pink-200'>*</sup></p>
             <input required type="text" name="lastName" placeholder="Enter last name" value={formData.lastName} onChange={changeHandler}
               className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white' />
@@ -89,15 +89,15 @@ const Signupform = () => {
           </label>
         </div>
 
-        <div className='flex gap-x-5 justify-between'>
-          <label className='relative mt-2'>
+        <div className='flex flex-col gap-4 sm:flex-row sm:gap-x-5 sm:justify-between'>
+          <label className='relative mt-2 w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>Create Password <sup className='text-pink-200'>*</sup></p>
             <input required type={showPassword ? ("text") : ("password")} name="password" placeholder="Create your password" value={formData.password} onChange={changeHandler}
               className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white' />
             <span className='absolute right-3 top-[38px] cursor-pointer text-white' onClick={() => setShowPassword((prev) => !prev)}>{showPassword ? <AiOutlineEye fontSize={20} fill='#AFB2BF' /> : <AiOutlineEyeInvisible fontSize={20} fill='#AFB2BF' />}</span>
           </label>
 
-          <label className='relative mt-2'>
+          <label className='relative mt-2 w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>Confirm Password <sup className='text-pink-200'>*</sup></p>
             <input required type={showconfirmpassword ? ("text") : ("password")} name="confirmPassword" placeholder="Confirm your password" value={formData.confirmPassword} onChange={changeHandler}
               className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white' />

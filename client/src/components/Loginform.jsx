@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import {login} from "../services/operations/authAPI"
 
@@ -11,7 +10,6 @@ const Loginform = ({setIsLoggedIn}) => {
     const dispatch = useDispatch();
     const[formData , setformData] = useState({email : "" , password : ""});
     const[showPassword , setshowPassword] = useState(false);
-    // const {email , password} = formData;
 
    function changeHandler(event){
         setformData((prevData)=>(
@@ -31,7 +29,7 @@ const Loginform = ({setIsLoggedIn}) => {
   return (
     <form onSubmit={submitHandler} className='flex flex-col w-full gap-y-4 mt-6'>
         <label className='w-full'>
-            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] ml-[-21rem]'>
+            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] lg:ml-[-21rem]'>
                 Email Address <sup className='text-pink-200'>*</sup>
             </p>
 
@@ -42,7 +40,7 @@ const Loginform = ({setIsLoggedIn}) => {
 
 
          <label className='w-full relative'>
-            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] ml-[-23rem]'>
+            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] lg:ml-[-23rem]'>
                Password <sup className='text-pink-200'>*</sup>
             </p>
 
