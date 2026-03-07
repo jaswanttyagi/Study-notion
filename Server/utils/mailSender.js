@@ -1,29 +1,6 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const BREVO_TIMEOUT_MS = Number(process.env.BREVO_TIMEOUT_MS || 10000);
-
-const fetchWithTimeout = async (url, options = {}, timeoutMs = BREVO_TIMEOUT_MS) => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    return await fetch(url, {
-      ...options,
-      signal: controller.signal,
-    });
-  } catch (error) {
-    if (error?.name === "AbortError") {
-      const timeoutError = new Error(`Request timed out after ${timeoutMs}ms`);
-      timeoutError.code = "ETIMEDOUT";
-      throw timeoutError;
-    }
-    throw error;
-  } finally {
-    clearTimeout(timeoutId);
-  }
-};
-
 const sendViaBrevoApi = async (email, title, body) => {
   const apiKey = (process.env.BREVO_API_KEY || "").trim();
   if (!apiKey) return null;
@@ -37,7 +14,7 @@ const sendViaBrevoApi = async (email, title, body) => {
 
   const senderName = (process.env.MAIL_FROM_NAME || "StudyNotion | EdTech").trim();
 
-  const response = await fetchWithTimeout("https://api.brevo.com/v3/smtp/email", {
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
       accept: "application/json",
@@ -201,7 +178,7 @@ const verifyBrevoApiConnection = async () => {
   const apiKey = (process.env.BREVO_API_KEY || "").trim();
   if (!apiKey) return null;
 
-  const response = await fetchWithTimeout("https://api.brevo.com/v3/account", {
+  const response = await fetch("https://api.brevo.com/v3/account", {
     method: "GET",
     headers: {
       accept: "application/json",
