@@ -64,7 +64,7 @@ const Signupform = () => {
       </div>
 
       <form onSubmit={submitHandler}>
-        <div className='mt-5 flex flex-col gap-4 sm:flex-row sm:gap-x-5 sm:justify-between'>
+        <div className='mt-5 flex flex-col gap-4 lg:flex-row lg:gap-x-5 lg:justify-between'>
           <label className='w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>first name <sup className='text-pink-200'>*</sup></p>
             <input required type="text" name="firstName" placeholder="Enter first name" value={formData.firstName} onChange={changeHandler}
@@ -89,7 +89,7 @@ const Signupform = () => {
           </label>
         </div>
 
-        <div className='flex flex-col gap-4 sm:flex-row sm:gap-x-5 sm:justify-between'>
+        <div className='flex flex-col gap-4 lg:flex-row lg:gap-x-5 lg:justify-between'>
           <label className='relative mt-2 w-full'>
             <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] '>Create Password <sup className='text-pink-200'>*</sup></p>
             <input required type={showPassword ? ("text") : ("password")} name="password" placeholder="Create your password" value={formData.password} onChange={changeHandler}
