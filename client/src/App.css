@@ -387,3 +387,17 @@ body {
     flex-direction: row;
   }
 }
+
+.signup-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .signup-row {
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 20px;
+  }
+}
