@@ -10,13 +10,15 @@ import { IoIosArrowDropdown } from 'react-icons/io'
 import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
 import { apiConnector } from '../../../../services/apiconnector'
 import { courseEndpoints } from '../../../../services/apis'
-import useIsSmallDevice from '../../../../hooks/useIsSmallDevice'
 
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isMobileCatalogOpen, setIsMobileCatalogOpen] = useState(false)
   const { COURSE_CATEGORIES_API, GET_ALL_COURSE_API } = courseEndpoints
-  const isSmallDevice = useIsSmallDevice()
+  const [isCompactDevice, setIsCompactDevice] = useState(() => {
+    if (typeof window === "undefined") return false
+    return window.innerWidth <= 1024
+  })
 
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
@@ -28,6 +30,13 @@ const Navbar = () => {
   const [categoriesLoading, setCategoriesLoading] = useState(true)
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsCompactDevice(window.innerWidth <= 1024)
+    }
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+
     const slugify = (value) =>
       String(value || "")
         .toLowerCase()
@@ -142,6 +151,10 @@ const Navbar = () => {
     }
 
     fetchCatalogCourseLinks()
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
   }, [COURSE_CATEGORIES_API, GET_ALL_COURSE_API])
 
   const matchRoute = (route) => { //route means path
@@ -269,7 +282,7 @@ const Navbar = () => {
             })
           }}
           aria-label="Toggle navigation"
-          style={{ display: isSmallDevice ? "flex" : "none" }}
+          style={{ display: isCompactDevice ? "flex" : "none" }}
         >
           {isMobileOpen ? <HiOutlineX size={22} /> : <HiOutlineMenuAlt3 size={22} />}
         </button>
@@ -277,7 +290,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {isSmallDevice && isMobileOpen && (
+      {isCompactDevice && isMobileOpen && (
         <div className="absolute left-0 top-14 z-50 w-full border-b border-richblack-700 bg-richblack-900 lg:hidden">
           <div className="w-11/12 mx-auto py-4 flex flex-col gap-4 text-richblack-25">
             <div className="flex flex-col gap-3">
