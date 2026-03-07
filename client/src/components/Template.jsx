@@ -6,8 +6,8 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Template = ({ title, desc1, desc2, image, formtype, setIsLoggedIn }) => {
   return (
-    <div className='mx-auto grid min-h-[calc(100vh-3.5rem)] w-full max-w-[1200px] grid-cols-1 gap-10 px-4 py-8 sm:px-6 md:py-12 lg:grid-cols-[minmax(0,480px)_minmax(0,1fr)] lg:items-center lg:gap-14'>
-      <div className='order-2 w-full lg:order-1'>
+    <div className='mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-[1200px] flex-col gap-10 px-4 py-8 sm:px-6 md:py-12 lg:flex-row lg:items-center lg:justify-between lg:gap-14'>
+      <div className='w-full lg:max-w-[480px] lg:flex-shrink-0'>
         <div className='rounded-[28px] border border-richblack-700/60 bg-richblack-800/80 p-5 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:p-8'>
           <h1 className="max-w-[18ch] text-left text-3xl font-semibold leading-tight text-white sm:text-4xl">
             {title}
@@ -36,7 +36,7 @@ const Template = ({ title, desc1, desc2, image, formtype, setIsLoggedIn }) => {
         </div>
       </div>
 
-      <div className='order-1 flex justify-center lg:order-2 lg:justify-end'>
+      <div className='flex w-full justify-center lg:max-w-[560px] lg:flex-1 lg:justify-end'>
         <div className='group relative w-full max-w-[520px] [perspective:1600px]'>
           <div className='absolute -left-4 top-8 h-24 w-24 rounded-full bg-blue-400/20 blur-2xl sm:-left-8 sm:h-32 sm:w-32'></div>
           <div className='absolute -right-2 bottom-10 h-28 w-28 rounded-full bg-yellow-200/20 blur-2xl sm:-right-6 sm:h-36 sm:w-36'></div>
