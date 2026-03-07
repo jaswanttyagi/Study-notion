@@ -23,6 +23,12 @@ require("dotenv").config();
 
 // find the port
 const PORT = process.env.PORT || 4000;
+
+const getMissingStartupEnvKeys = () => {
+  const requiredKeys = ["DATABASE_URL", "JWT_SECRET"];
+  return requiredKeys.filter((key) => !(process.env[key] || "").trim());
+};
+
 // adding middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -61,13 +67,29 @@ app.get("/", (req, res) => {
 
 const startServer = async () => {
   try {
+    console.log("Startup check: validating environment");
+    const missingKeys = getMissingStartupEnvKeys();
+    if (missingKeys.length > 0) {
+      throw new Error(`Missing required env vars: ${missingKeys.join(", ")}`);
+    }
+
+    console.log("Startup check: connecting to database");
     await db();
+
+    console.log("Startup check: configuring cloudinary");
     cloudinaryConnect();
+
+    console.log("Startup check: starting express server");
     app.listen(PORT, () => {
       console.log(`App is listening at ${PORT}`);
     });
   } catch (error) {
-    console.error("Server startup failed:", error);
+    console.error("Server startup failed:", {
+      message: error?.message,
+      code: error?.code,
+      name: error?.name,
+      stack: error?.stack,
+    });
     process.exit(1);
   }
 };
