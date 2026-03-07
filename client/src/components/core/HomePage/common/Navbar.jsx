@@ -230,6 +230,7 @@ const Navbar = () => {
         </nav>
 
         {/* Login/signup/Dashoard */}
+        {!isCompactDevice && (
         <div className='flex gap-4 items-center max-lg:hidden'>
 
           {
@@ -268,6 +269,7 @@ const Navbar = () => {
           }
 
         </div>
+        )}
 
         {/* Mobile menu button */}
         <button
