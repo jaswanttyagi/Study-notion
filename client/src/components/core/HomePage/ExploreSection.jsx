@@ -57,7 +57,7 @@ const ExploreSection = () => {
 
             {/* cards */}
              <div className='mt-10 w-full'>
-                <div className='flex flex-col gap-6 lg:flex-row lg:items-stretch lg:justify-between lg:gap-8'>
+                <div className='grid grid-cols-1 gap-6 lg:grid-cols-3 lg:items-stretch lg:gap-8'>
                     {
                         courses.map((value, index) => {
                             return (

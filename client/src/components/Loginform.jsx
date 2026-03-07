@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react';
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import {login} from "../services/operations/authAPI"
 
@@ -11,8 +10,6 @@ const Loginform = ({setIsLoggedIn}) => {
     const dispatch = useDispatch();
     const[formData , setformData] = useState({email : "" , password : ""});
     const[showPassword , setshowPassword] = useState(false);
-    // const {email , password} = formData;
-
    function changeHandler(event){
         setformData((prevData)=>(
             {
@@ -29,36 +26,36 @@ const Loginform = ({setIsLoggedIn}) => {
 }
 
   return (
-    <form onSubmit={submitHandler} className='flex flex-col w-full gap-y-4 mt-6'>
+    <form onSubmit={submitHandler} className='mt-8 flex w-full flex-col gap-y-5'>
         <label className='w-full'>
-            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] ml-[-21rem]'>
+            <p className='mb-2 text-sm leading-[1.375rem] text-richblack-25'>
                 Email Address <sup className='text-pink-200'>*</sup>
             </p>
 
             <input required type="email" value={formData.email} name="email" onChange={changeHandler} placeholder="Enter email id" 
-            className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white'
+            className='w-full rounded-xl border border-richblack-600 bg-richblack-700 px-4 py-3 text-white outline-none transition-colors duration-200 placeholder:text-richblack-300 focus:border-yellow-100'
             />
         </label>
 
 
-         <label className='w-full relative'>
-            <p className='text-[0.875rem] text-white mb-1 leading-[1.375rem] ml-[-23rem]'>
+         <label className='relative w-full'>
+            <p className='mb-2 text-sm leading-[1.375rem] text-richblack-25'>
                Password <sup className='text-pink-200'>*</sup>
             </p>
 
             <input required type={showPassword ? ("text") : ("password")}
              value={formData.password} name="password" onChange={changeHandler} placeholder="Enter password"
-             className='bg-[oklch(27.9% 0.041 260.031)] w-full py-[8px] px-[12px] rounded-[8px] border border-white text-white'
+             className='w-full rounded-xl border border-richblack-600 bg-richblack-700 px-4 py-3 pr-12 text-white outline-none transition-colors duration-200 placeholder:text-richblack-300 focus:border-yellow-100'
 
              />
              
-             <span className='absolute right-3 top-[38px] cursor-pointer text-white' onClick={() => setshowPassword((prev) => !prev)}>{showPassword ? <AiOutlineEye fontSize={20} fill='#AFB2BF' />  : <AiOutlineEyeInvisible />}</span>
+             <span className='absolute right-4 top-[44px] cursor-pointer text-white/80' onClick={() => setshowPassword((prev) => !prev)}>{showPassword ? <AiOutlineEye fontSize={20} fill='#AFB2BF' />  : <AiOutlineEyeInvisible fontSize={20} fill='#AFB2BF' />}</span>
 
-             <Link to="/forgot-password"><p className="text-xs mt-1 text-blue-100 max-w-max ml-auto">Forgot Password</p></Link>
+             <Link to="/forgot-password"><p className="ml-auto mt-2 max-w-max text-xs text-blue-100">Forgot Password</p></Link>
              
         </label>
 
-        <button type='submit' className="bg-yellow-300 py-[8px] px-[12px] rounded-[8px] mt-6 font-medium text-richblack-900">Sign in</button>
+        <button type='submit' className="mt-3 rounded-xl bg-yellow-300 px-4 py-3 font-medium text-richblack-900 transition-all duration-200 hover:-translate-y-0.5 hover:bg-yellow-200">Sign in</button>
     </form>
   )
 }
