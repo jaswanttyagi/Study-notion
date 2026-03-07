@@ -669,3 +669,142 @@ body {
 .mobile-home-reviews {
   padding-bottom: 8px;
 }
+
+.mobile-about-page,
+.mobile-contact-page {
+  background: #000814;
+  color: #f8fafc;
+}
+
+.mobile-about-hero,
+.mobile-about-quote,
+.mobile-about-story,
+.mobile-about-dual,
+.mobile-about-stats,
+.mobile-contact-hero,
+.mobile-contact-stack {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 22px 16px;
+}
+
+.mobile-about-kicker,
+.mobile-contact-kicker {
+  margin: 0;
+  color: #22d3ee;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.mobile-about-title,
+.mobile-contact-title {
+  margin: 12px 0 0;
+  font-size: 32px;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.mobile-about-copy,
+.mobile-contact-copy {
+  margin: 14px 0 0;
+  color: #94a3b8;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.mobile-about-gallery {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mobile-about-gallery img {
+  width: 100%;
+  height: 148px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.mobile-about-quote {
+  padding-top: 4px;
+}
+
+.mobile-about-story {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mobile-about-story-image {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 0 24px 0 rgba(252, 103, 103, 0.4);
+}
+
+.mobile-about-card {
+  border-radius: 24px;
+  background: #161d29;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 20px 18px;
+}
+
+.mobile-about-card h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+}
+
+.mobile-about-card p {
+  margin: 0 0 12px;
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+.mobile-about-card p:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-about-dual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mobile-about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.mobile-about-stat {
+  border-radius: 20px;
+  background: #161d29;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  padding: 18px 14px;
+  text-align: center;
+}
+
+.mobile-about-stat h3 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.mobile-about-stat p {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.mobile-contact-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mobile-contact-panel {
+  border-radius: 24px;
+}

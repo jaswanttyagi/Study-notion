@@ -4,8 +4,16 @@ import Footer from "../components/core/HomePage/common/Footer"
 import ContactDetails from "../components/core/HomePage/contactPage/ContactDetails"
 import ContactForm from "../components/core/HomePage/contactPage/ContactForm"
 // import ReviewSlider from "../components/common/ReviewSlider"
+import MobileContact from "./MobileContact"
+import useIsSmallDevice from "../hooks/useIsSmallDevice"
 
 const Contact = () => {
+  const isSmallDevice = useIsSmallDevice()
+
+  if (isSmallDevice) {
+    return <MobileContact />
+  }
+
   return (
     <div>
       <div className="mx-auto mt-20 lg:flex w-11/12 max-w-maxContent lg:flex-row sm:flex  sm:flex-col justify-between gap-10 text-white ">

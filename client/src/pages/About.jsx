@@ -11,8 +11,16 @@ import StatsComponenet from "../components/core/AboutPage/Stats"
 import HighlightText from "../components/core/HomePage/HighlightText"
 // import ReviewSlider from "../components/common/ReviewSlider"
 import Footer from "../components/core/HomePage/common/Footer"
+import MobileAbout from "./MobileAbout"
+import useIsSmallDevice from "../hooks/useIsSmallDevice"
 
 const About = () => {
+  const isSmallDevice = useIsSmallDevice()
+
+  if (isSmallDevice) {
+    return <MobileAbout />
+  }
+
   return (
     <div>
       <section className="bg-richblack-700">
