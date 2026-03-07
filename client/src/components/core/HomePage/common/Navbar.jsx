@@ -7,11 +7,13 @@ import { useSelector } from "react-redux"
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import ProfileDropdown from '../../Auth/ProfileDropdown'
 import { IoIosArrowDropdown } from 'react-icons/io'
+import { HiOutlineMenuAlt3, HiOutlineX } from 'react-icons/hi'
 import { apiConnector } from '../../../../services/apiconnector'
 import { courseEndpoints } from '../../../../services/apis'
 
 const Navbar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [isMobileCatalogOpen, setIsMobileCatalogOpen] = useState(false)
   const { COURSE_CATEGORIES_API, GET_ALL_COURSE_API } = courseEndpoints
 
   const { token } = useSelector((state) => state.auth)
@@ -143,10 +145,15 @@ const Navbar = () => {
   const matchRoute = (route) => { //route means path
     return matchPath({ path: route }, location.pathname)
   }
+
+  const closeMobileMenu = () => {
+    setIsMobileOpen(false)
+    setIsMobileCatalogOpen(false)
+  }
   return (
     <div className='flex h-14 max-lg:h-auto items-center justify-center border-b-[1px] border-b-richblack-700'>
 
-      <div className='lg:w-11/12 max-lg:w-11/12 flex justify-between items-center max-w-maxContent max-lg:flex-col max-lg:gap-3 max-lg:py-3'>
+      <div className='flex w-11/12 max-w-maxContent items-center justify-between py-3 lg:w-11/12 lg:py-0'>
         <Link to={"/"}>
           <img width={160} height={42} loading='lazy' src={Logo} alt="Edtech" />
         </Link>
@@ -249,66 +256,88 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <button
-          className="hidden max-lg:flex items-center justify-center rounded-md border border-richblack-700 px-3 py-2 text-richblack-100"
-          onClick={() => setIsMobileOpen((prev) => !prev)}
+          className="flex items-center justify-center rounded-md border border-richblack-700 px-3 py-2 text-richblack-100 lg:hidden"
+          onClick={() => {
+            setIsMobileOpen((prev) => {
+              const nextState = !prev
+              if (!nextState) {
+                setIsMobileCatalogOpen(false)
+              }
+              return nextState
+            })
+          }}
           aria-label="Toggle navigation"
         >
-          {isMobileOpen ? "Close" : "Menu"}
+          {isMobileOpen ? <HiOutlineX size={22} /> : <HiOutlineMenuAlt3 size={22} />}
         </button>
 
       </div>
 
       {/* Mobile menu */}
       {isMobileOpen && (
-        <div className="hidden max-lg:block absolute top-14 left-0 z-50 w-full border-b border-richblack-700 bg-richblack-900">
+        <div className="absolute left-0 top-14 z-50 w-full border-b border-richblack-700 bg-richblack-900 lg:hidden">
           <div className="w-11/12 mx-auto py-4 flex flex-col gap-4 text-richblack-25">
             <div className="flex flex-col gap-3">
-              {NavbarLinks.map((link, index) => (
-                <div key={index}>
-                  {link.title === "Catalog" ? (
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <p>{link.title}</p>
-                        <IoIosArrowDropdown />
-                      </div>
-                      <div className="grid gap-2 rounded-lg bg-richblack-800 p-3">
-                        {subLinks.length > 0 ? (
-                          subLinks.map((sublink) => {
-                            const title = sublink?.title ?? "Category"
-                            const linkPath = sublink?.link ?? "#"
-                            const key = sublink?.id || title
-                            return (
-                              <Link
-                                to={linkPath}
-                                key={key}
-                                className="block rounded-md bg-richblack-900 px-3 py-2 text-sm font-medium text-richblack-100"
-                                onClick={() => setIsMobileOpen(false)}
-                              >
-                                {title}
-                              </Link>
-                            )
-                          })
-                        ) : categoriesLoading ? (
-                          <p className="text-sm text-richblack-300">Loading...</p>
-                        ) : (
-                          <p className="text-sm text-richblack-300">No categories</p>
-                        )}
-                      </div>
-                    </div>
-                  ) : (
-                    <Link to={link?.path} onClick={() => setIsMobileOpen(false)}>
-                      <p className={`${matchRoute(link?.path) ? "text-yellow-25" : "text-richblack-25"}`}>
-                        {link.title}
-                      </p>
-                    </Link>
-                  )}
+              {isMobileCatalogOpen ? (
+                <div className="flex flex-col gap-3">
+                  <button
+                    className="flex items-center gap-2 text-left text-sm font-semibold text-yellow-25"
+                    onClick={() => setIsMobileCatalogOpen(false)}
+                  >
+                    <span>←</span>
+                    <span>Back to menu</span>
+                  </button>
+
+                  <div className="grid gap-2 rounded-lg bg-richblack-800 p-3">
+                    {subLinks.length > 0 ? (
+                      subLinks.map((sublink) => {
+                        const title = sublink?.title ?? "Category"
+                        const linkPath = sublink?.link ?? "#"
+                        const key = sublink?.id || title
+                        return (
+                          <Link
+                            to={linkPath}
+                            key={key}
+                            className="block rounded-md bg-richblack-900 px-3 py-2 text-sm font-medium text-richblack-100"
+                            onClick={closeMobileMenu}
+                          >
+                            {title}
+                          </Link>
+                        )
+                      })
+                    ) : categoriesLoading ? (
+                      <p className="text-sm text-richblack-300">Loading...</p>
+                    ) : (
+                      <p className="text-sm text-richblack-300">No categories</p>
+                    )}
+                  </div>
                 </div>
-              ))}
+              ) : (
+                NavbarLinks.map((link, index) => (
+                  <div key={index}>
+                    {link.title === "Catalog" ? (
+                      <button
+                        className="flex w-full items-center justify-between rounded-lg border border-richblack-700 bg-richblack-800 px-4 py-3 text-left"
+                        onClick={() => setIsMobileCatalogOpen(true)}
+                      >
+                        <span>Catalog</span>
+                        <IoIosArrowDropdown className="-rotate-90" />
+                      </button>
+                    ) : (
+                      <Link to={link?.path} onClick={closeMobileMenu}>
+                        <div className={`rounded-lg border border-richblack-700 px-4 py-3 ${matchRoute(link?.path) ? "text-yellow-25 bg-richblack-800" : "text-richblack-25"}`}>
+                          {link.title}
+                        </div>
+                      </Link>
+                    )}
+                  </div>
+                ))
+              )}
             </div>
 
             <div className="flex flex-col gap-3 border-t border-richblack-700 pt-4">
               {user && user?.accountType !== "Instructor" && (
-                <Link to="/dashboard/cart" className='text-white relative' onClick={() => setIsMobileOpen(false)}>
+                <Link to="/dashboard/cart" className='text-white relative' onClick={closeMobileMenu}>
                   <div className="flex items-center gap-2">
                     <AiOutlineShoppingCart />
                     <span>Cart</span>
@@ -322,7 +351,7 @@ const Navbar = () => {
               )}
 
               {token === null && (
-                <Link to={"/login"} onClick={() => setIsMobileOpen(false)}>
+                <Link to={"/login"} onClick={closeMobileMenu}>
                   <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
                     Log in
                   </button>
@@ -330,7 +359,7 @@ const Navbar = () => {
               )}
 
               {token === null && (
-                <Link to={"/signup"} onClick={() => setIsMobileOpen(false)}>
+                <Link to={"/signup"} onClick={closeMobileMenu}>
                   <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
                     Sign Up
                   </button>
