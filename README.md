@@ -155,8 +155,6 @@ Study Notion provides an online educational ecosystem where:
 ║  📱 UI/UX        → Responsive • Clean • Modern            ║
 ║  ⚙️ Backend      → APIs • Database • Scalable Logic       ║
 ╚════════════════════════════════════════════════════════════╝
-
-
 🖼️ Project Preview
 <p align="center"> <img src="YOUR_SCREENSHOT_OR_GIF_LINK" alt="Study Notion Preview" width="900"/> </p>
 
@@ -312,4 +310,4 @@ For the best look, add:
 - one **course page screenshot**
 - one **GIF preview**
 
-I can also turn this into an even more insane **glassmorphism + cyberpunk + elite developer README** version for Study Notion.
+I can also turn this into an even more insane **glassmorphism + cyberpunk + elite developer
