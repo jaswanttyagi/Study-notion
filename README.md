@@ -155,3 +155,161 @@ Study Notion provides an online educational ecosystem where:
 ║  📱 UI/UX        → Responsive • Clean • Modern            ║
 ║  ⚙️ Backend      → APIs • Database • Scalable Logic       ║
 ╚════════════════════════════════════════════════════════════╝
+
+
+🖼️ Project Preview
+<p align="center"> <img src="YOUR_SCREENSHOT_OR_GIF_LINK" alt="Study Notion Preview" width="900"/> </p>
+
+Add screenshots or a GIF here to make the README look much more premium.
+
+📂 Folder Structure
+Study-Notion/
+│
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── assets/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── config/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── middlewares/
+│   ├── utils/
+│   ├── index.js
+│   └── package.json
+│
+└── README.md
+🚀 Installation Guide
+1. Clone the repository
+git clone YOUR_REPOSITORY_LINK
+cd Study-Notion
+2. Install frontend dependencies
+cd client
+npm install
+3. Install backend dependencies
+cd ../server
+npm install
+4. Setup environment variables
+
+Create a .env file in the server directory and add:
+
+PORT=5000
+MONGODB_URL=your_mongodb_connection
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+RAZORPAY_KEY=your_payment_key
+RAZORPAY_SECRET=your_payment_secret
+5. Start backend
+npm run dev
+6. Start frontend
+cd ../client
+npm run dev
+🧪 Learning Outcomes
+
+This project helped me understand:
+
+how to build a complete MERN stack application
+
+how frontend and backend communicate through APIs
+
+how to manage authentication and authorization
+
+how to organize large projects with reusable structure
+
+how to design a responsive educational dashboard
+
+how to connect real-world app flows like course enrollment and instructor management
+
+🌍 Why This Project Matters
+
+Study Notion is more than a CRUD project.
+It reflects the structure of a real-world educational product, where multiple user roles, secure access, clean UI, and full-stack logic work together to create a usable digital platform.
+
+It demonstrates:
+
+product thinking
+
+scalable architecture
+
+role-based app design
+
+responsive frontend engineering
+
+backend integration skills
+
+🚧 Future Enhancements
+
+🎥 video lecture streaming
+
+📈 course progress analytics
+
+📝 quizzes and assignments
+
+💬 student-instructor communication
+
+🏅 certificate generation
+
+🔔 notifications system
+
+🌙 dark/light theme toggle
+
+🤖 AI learning assistant integration
+
+📊 Project Badges
+<p align="center"> <img src="https://img.shields.io/badge/MERN-FullStack-3FA037?style=for-the-badge&logo=mongodb&logoColor=white"/> <img src="https://img.shields.io/badge/React-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black"/> <img src="https://img.shields.io/badge/Node.js-Backend-339933?style=for-the-badge&logo=node.js&logoColor=white"/> <img src="https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/> <img src="https://img.shields.io/badge/Auth-JWT-orange?style=for-the-badge"/> <img src="https://img.shields.io/badge/UI-Responsive-blueviolet?style=for-the-badge"/> </p>
+👨‍💻 Author
+
+Jaswant Singh
+
+<p align="left"> <a href="https://github.com/jaswantt-singh"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github" /> </a> <a href="https://linkedin.com/in/YOUR_LINKEDIN"> <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /> </a> <a href="mailto:YOUR_EMAIL@gmail.com"> <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /> </a> </p>
+⭐ Support
+
+If you like this project, consider giving it a star ⭐ on GitHub.
+
+💬 Quote
+
+"Education becomes more powerful when technology makes learning accessible, engaging, and interactive."
+
+🔥 Optional Premium Add-ons
+
+You can add these extra sections too:
+
+👀 Profile-style visitor badge
+<img src="https://komarev.com/ghpvc/?username=jaswantt-singh&label=Project%20Views&color=0e75b6&style=flat" />
+🎬 GIF preview
+<p align="center">
+  <img src="preview.gif" width="900" />
+</p>
+🧩 Extra tech badge row
+<p align="center">
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=redux&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=flat-square&logo=cloudinary&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white"/>
+</p>
+
+### To make it truly world-class
+Replace these placeholders:
+- `YOUR_LIVE_LINK_HERE`
+- `YOUR_GITHUB_LINK_HERE`
+- `YOUR_SCREENSHOT_OR_GIF_LINK`
+- `YOUR_LINKEDIN`
+- `YOUR_EMAIL@gmail.com`
+
+For the best look, add:
+- one **hero screenshot**
+- one **dashboard screenshot**
+- one **course page screenshot**
+- one **GIF preview**
+
+I can also turn this into an even more insane **glassmorphism + cyberpunk + elite developer README** version for Study Notion.
